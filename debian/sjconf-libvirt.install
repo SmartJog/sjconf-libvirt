@@ -1,0 +1,3 @@
+plugins/*.py            usr/share/sjconf-libvirt/plugins
+confs/libvirt.conf      etc/sjconf-libvirt/confs
+templates/libvirt/*.xml etc/sjconf-libvirt/templates/libvirt

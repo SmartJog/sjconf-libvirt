@@ -1,0 +1,6 @@
+    <interface type='%(net_type)s'>
+      <mac address='%(mac)s'/>
+      <source bridge='%(device)s'/>
+      <model type='%(driver)s'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='%(slot)s' function='0x0'/>
+    </interface>

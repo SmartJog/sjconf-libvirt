@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+PLUGINS='libvirt'
+
+if [ "$1" = 'remove' ]
+then
+	for plugin in $PLUGINS
+	do
+		sjconf --disable-plugin $plugin || true
+		sjconf --uninstall-plugin $plugin || true
+        if [ -e /etc/sjconf-libvirt/templates/$plugin ]; then
+             sjconf --uninstall-template $plugin || true
+        fi
+		sjconf --uninstall-conf $plugin || true
+	done
+fi

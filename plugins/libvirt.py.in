@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+
+import os
+import re
+import sjconf
+
+
+class Plugin(sjconf.PluginWithTemplate):
+
+    VERSION = '@PACKAGE_VERSION@'
+
+    class ConfSection(sjconf.Conf.ConfSection):
+        """ Custom key type conversion class. """
+
+        def __getitem__(self, key):
+            value = sjconf.Conf.ConfSection.__getitem__(self, key)
+            if key == 'memory_size':
+                # libvirt counts in kbytes
+                value /= 1024
+            return value
+
+    def services_to_restart(self):
+        return ('libvirt-bin',)
+
+    def services_to_reload(self):
+        return ('libvirt-bin',)
+
+    def conf_types(self):
+        """ List of special option types. """
+        return (
+            (re.compile('^%s(:|$)' % self.name()), 'memory', 'size'),
+        )
+
+    def conf_files_path(self):
+        """ List of configuration files to handle. """
+        prefix = self.name() + ':'
+        return [self.sjconf.etc_dir + '/libvirt/qemu/%s.xml' % vmconf[len(prefix):]
+            for vmconf in self.conf if vmconf.startswith(prefix) and not ':' in vmconf[len(prefix):]]
+
+    def template_conf(self, file_path):
+        """ Select appropriate configuration for @file_path. """
+        section_name = file_path.split('::')[-1]
+        return self.conf[section_name]
+
+    def template_path(self, file_path, _conf=None):
+        """ Select appropriate template for @file_path.
+
+        @file_path must be of the form path::section
+        """
+        section_name = file_path.split('::')[-1]
+        if ':disk:' in section_name:
+            template_key = 'disk'
+        elif ':network:' in section_name:
+            template_key = 'network'
+        else:
+            template_key = 'vm'
+
+        return self.sjconf.base_dir + '/' + self.conf[self.name()]['template_' + template_key]
+
+    def file_content(self, file_path):
+        """ Generate @file_path configuration file. """
+        prefix = self.name() + ':'
+
+        # Identify VM
+        vmsection = prefix + os.path.basename(file_path).strip('.xml')
+
+        # Building VM's content
+        disk_content = []
+        network_content = []
+
+        for section in self.conf:
+            if section.startswith(vmsection + ':disk:'):
+                disk_content.append(sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
+            elif section.startswith(vmsection + ':network:'):
+                network_content.append(sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
+
+        self.conf[vmsection]['vm_disks'] = '\n'.join(disk_content)
+        self.conf[vmsection]['vm_networks'] = '\n'.join(network_content)
+
+        return sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, vmsection))
+
+

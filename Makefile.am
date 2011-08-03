@@ -1,0 +1,7 @@
+SUBDIRS = doc
+
+SJCONF_PLUGINS_WITH_TEMPLATE = libvirt
+
+dist_doc_DATA = README.rst
+
+@AM_SJCONF@

@@ -1,0 +1,130 @@
+SJCONF-libvirt
+sjconf-libvirt
+%%mtime
+
+%!target : man
+%!encoding : utf-8
+%!postproc(man): "^(\.TH.*) 1 "  "\1 8 "
+
+= NAME =
+
+sjconf-libvirt - handle **libvirt** configuration through **sjconf**(8)
+
+= DESCRIPTION =
+
+sjconf is a configuration wrapper that handles global and server specific
+configuration, deployment and service restart.
+
+The libvirt plugin allows for handling the **libvirt** configuration files.
+
+The plugin allows one **[libvirt]** section and multiple sections of the form
+**[libvirt:vmname]**, **[libvirt:vmname:disk:slot]** and
+**[libvirt:vmname:network:slot]**.
+
+A virtual machine definition is composed of a least one **libvirt:vmname**.
+**libvirt:vmname:disk:slot** and **libvirt:vmname:network:slot**, where
+//slot// is an usually an integer, are used to add virtual disks or virtual
+network interfaces to the //vmname// virtual machine definition.
+
+Section **libvirt** must have the following options:
+
+:    **template_vm** = //path//
+Path to the template for a virtual machine definition.
+
+:    **template_disk** = //path//
+Path to the disk fragment of a virtual machine definition.
+
+:    **template_network** = //path//
+Path to the network fragment of a virtual machine definition.
+
+
+= OPTIONS =
+
+Section **libvirt:vmname** need the following options:
+
+:    **name** = //string//
+Name of the virtual machine.
+
+:    **uuid** = //string//
+A unique identifier for the virtual machine.
+
+:    **memory** = //size//
+Size of the memory that will be allocated to the virtual machine.
+
+:    **cpus** = //integer//
+Number of CPUs to allocate to the virtual machine.
+
+:    **architecture** = //string//
+Name of the architecture the virtual machine should run as.
+
+
+**libvirt:vmname:disk:slot** sections need the following options:
+
+:    **device** = //vda//
+Name of the device.
+
+:    **driver** = //virtio//
+Name of the driver used by KVM to emulate disk I/O chipset.
+
+:    **slot** = //0x06//
+Position of the device in the chain of devices owned by the virtual machine. The
+value is written as hexadecimal and starts at 0x04 with the default template.
+
+:    **filename** = //path//
+Path to the file that will be used as a virtual disk drive.
+
+:    **size** = //size//
+Size of the disk drive. Unused for now.
+
+
+**libvirt:vmname:network:slot** sections need the following options:
+
+:    **net_type** = //bridge//
+Type of network connectivity the virtual machine should use.
+
+:    **device** = //virbr0//
+Name of the network interface used by the virtual machine.
+
+:    **driver** = //virtio//
+Name of the driver used by KVM to emulate network device.
+
+:    **mac** = //mac_address//
+MAC address that will be used by the virtual machine.
+
+:    **slot** = //0x06//
+Position of the device in the chain of devices owned by the virtual machine. The
+value is written as hexadecimal and starts at 0x04 with the default template.
+
+
+= EXAMPLE =
+
+  [libvirt:vm1]
+  name = vmtest
+  uuid = 684e0de6-c726-2403-6468-b1981f84c5f3
+  memory = 2G
+  cpus = 2
+  architecture = i686
+
+  [libvirt:vm1:disk:0]
+  device = vda
+  driver = virtio
+  slot = 0x05
+  filename = /mnt/space/vms/test/hdd0.img
+  size = 20G
+
+  [libvirt:vm1:network:0]
+  net_type = bridge
+  device = virbr0
+  driver = virtio
+  mac = 52:54:00:00:9c:76
+  slot = 0x06
+
+
+= AUTHOR =
+
+The sjconf libvirt plugin and this manual page have been written by the **SmartJog** company.
+
+= SEE ALSO =
+
+**sjconf**(8).
+
