@@ -11,7 +11,7 @@ then
 	do
 		sjconf --disable-plugin $plugin || true
 		sjconf --uninstall-plugin $plugin || true
-        if [ -e /etc/sjconf-libvirt/templates/$plugin ]; then
+        if [ -e /usr/share/sjconf-libvirt/templates/$plugin ]; then
              sjconf --uninstall-template $plugin || true
         fi
 		sjconf --uninstall-conf $plugin || true

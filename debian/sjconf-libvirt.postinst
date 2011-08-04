@@ -9,12 +9,12 @@ for plugin in $PLUGINS
 do
 	if ! sjconf --list-plugins | grep "^Plugin $plugin$" > /dev/null
 	then
-		sjconf --install-conf --link /etc/sjconf-libvirt/confs/$plugin.conf
-        if [ -e /etc/sjconf-libvirt/templates/$plugin ]
+		sjconf --install-conf --link /usr/share/sjconf-libvirt/confs/$plugin.conf
+        if [ -e /usr/share/sjconf-libvirt/templates/$plugin ]
         then
-            sjconf --install-template --link /etc/sjconf-libvirt/templates/$plugin
+            sjconf --install-template --link /usr/share/sjconf-libvirt/templates/$plugin
         fi
-		sjconf --install-plugin --link /usr/lib/sjconf-libvirt/plugins/$plugin.py
+		sjconf --install-plugin --link /usr/share/sjconf-libvirt/plugins/$plugin.py
 		sjconf --enable-plugin $plugin
 	fi
 done
