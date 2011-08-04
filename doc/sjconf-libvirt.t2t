@@ -42,9 +42,6 @@ Path to the network fragment of a virtual machine definition.
 
 Section **libvirt:vmname** need the following options:
 
-:    **name** = //string//
-Name of the virtual machine.
-
 :    **uuid** = //string//
 A unique identifier for the virtual machine.
 

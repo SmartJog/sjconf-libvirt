@@ -74,6 +74,7 @@ class Plugin(sjconf.PluginWithTemplate):
             elif section.startswith(vmsection + ':network:'):
                 network_content.append(sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
 
+        self.conf[vmsection]['name'] = vmsection[len(prefix):]
         self.conf[vmsection]['vm_disks'] = '\n'.join(disk_content)
         self.conf[vmsection]['vm_networks'] = '\n'.join(network_content)
 
