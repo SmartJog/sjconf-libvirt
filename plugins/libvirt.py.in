@@ -13,10 +13,23 @@ class Plugin(sjconf.PluginWithTemplate):
         """ Custom key type conversion class. """
 
         def __getitem__(self, key):
+            if key == 'vnc_port_auto':
+                if sjconf.Conf.ConfSection.__getitem__(self, 'vnc_port') != '-1':
+                    return 'no'
+                else:
+                    return 'yes'
+
             value = sjconf.Conf.ConfSection.__getitem__(self, key)
             if key == 'memory_size':
                 # libvirt counts in kbytes
                 value /= 1024
+
+            elif key == 'vnc_password':
+                if value != 'none':
+                    value = 'passwd="%s"' % value
+                else:
+                    value = ""
+
             return value
 
     def services_to_restart(self):
@@ -40,7 +53,9 @@ class Plugin(sjconf.PluginWithTemplate):
     def template_conf(self, file_path):
         """ Select appropriate configuration for @file_path. """
         section_name = file_path.split('::')[-1]
-        return self.conf[section_name]
+        conf = self.conf[self.name()]
+        conf.update(self.conf[section_name])
+        return conf
 
     def template_path(self, file_path, _conf=None):
         """ Select appropriate template for @file_path.

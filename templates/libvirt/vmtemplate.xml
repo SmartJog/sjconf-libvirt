@@ -41,7 +41,7 @@
       <target type='serial' port='0'/>
     </console>
     <input type='mouse' bus='ps2'/>
-    <graphics type='vnc' port='-1' autoport='yes'/>
+    <graphics type='vnc' port='%(vnc_port)s' autoport='%(vnc_port_auto)s' listen='%(vnc_listen)s' %(vnc_password)s />
     <video>
       <model type='cirrus' vram='9216' heads='1'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>

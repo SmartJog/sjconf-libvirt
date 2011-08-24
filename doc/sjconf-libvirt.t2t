@@ -55,6 +55,19 @@ Number of CPUs to allocate to the virtual machine.
 Name of the architecture the virtual machine should run as.
 
 
+Section **libvirt:vmname** may contain the following options:
+
+:    **vnc_port** = //integer//
+Port on which the VNC server will listen for incoming connections.
+Setting to -1 leave libvirt to determine which port to use automatically.
+
+:    **vnc_listen** = //IP//
+IP address on which the VNC server will listen for incoming connections.
+
+:    **vnc_password** = //string//
+If not set to none, password that will be requested by the VNC server.
+
+
 **libvirt:vmname:disk:slot** sections need the following options:
 
 :    **device** = //vda//
@@ -101,6 +114,9 @@ value is written as hexadecimal and starts at 0x04 with the default template.
   memory = 2G
   cpus = 2
   architecture = i686
+  vnc_port = -1
+  vnc_listen = 127.0.0.1
+  vnc_password = none
 
   [libvirt:vm1:disk:0]
   device = vda
