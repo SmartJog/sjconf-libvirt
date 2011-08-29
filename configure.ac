@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.67)
-AC_INIT([sjconf-libvirt], [0.1.0~dev])
+AC_INIT([sjconf-libvirt], [0.1.0])
 AM_INIT_AUTOMAKE([-Wall foreign])
 
 SJ_PROG_SJCONF

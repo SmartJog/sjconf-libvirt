@@ -1,5 +1,5 @@
-sjconf-libvirt (0.1.0~dev-1) unstable; urgency=low
+sjconf-libvirt (0.1.0-1) unstable; urgency=low
 
   * Initial release. (Closes: #4500)
 
- -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Wed, 03 Aug 2011 17:24:01 +0200
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Mon, 29 Aug 2011 14:26:39 +0200
