@@ -1,8 +1,10 @@
-sjconf-libvirt (0.1.1~dev-1) unstable; urgency=low
+sjconf-libvirt (0.1.1-1) unstable; urgency=low
 
   * New upstream release
+  * Add myself to uploaders
+  * Clean the debian/control file
 
- -- Nicolas Delvaux <nicolas.delvaux@smartjog.com>  Tue, 29 Jan 2013 18:08:53 +0100
+ -- Nicolas Delvaux <nicolas.delvaux@smartjog.com>  Tue, 29 Jan 2013 18:38:53 +0100
 
 sjconf-libvirt (0.1.0-1) unstable; urgency=low
 

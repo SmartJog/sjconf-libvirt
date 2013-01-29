@@ -2,14 +2,20 @@ Source: sjconf-libvirt
 Priority: optional
 Section: admin
 Maintainer: Philippe Bridant <philippe.bridant@smartjog.com>
-Uploaders: Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>
-Build-Depends: cdbs (>= 0.4.43), debhelper (>= 7), txt2tags, python-central (>= 0.6)
+Uploaders: Nicolas Delvaux <nicolas.delvaux@smartjog.com>
+Build-Depends: cdbs (>= 0.4.43),
+	       debhelper (>= 7),
+	       txt2tags,
+	       python-central (>= 0.6)
 XS-Python-Version: >= 2.5
 Standards-Version: 3.9.1
 
 Package: sjconf-libvirt
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, sjconf1 (>= 1.3.3), libvirt-bin (>= 0.8)
+Depends: ${misc:Depends},
+	 ${python:Depends},
+	 sjconf1 (>= 1.3.3),
+	 libvirt-bin (>= 0.8)
 XB-Python-Version: ${python:Versions}
 Description: sjconf plugin for libvirt
  This package provides a plugin to manage libvirt using sjconf.

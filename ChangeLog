@@ -1,4 +1,4 @@
-Version 0.1.1~dev
+Version 0.1.1 Released on 2013/01/29
 
 	* Fix interface ordering in some random cases, closes: #6577
 	* Improve the man page
