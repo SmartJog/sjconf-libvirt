@@ -85,9 +85,13 @@ class Plugin(sjconf.PluginWithTemplate):
 
         for section in self.conf:
             if section.startswith(vmsection + ':disk:'):
-                disk_content.append(sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
+                index = section.rfind(':')
+                disk_num = int(section[index + 1:])
+                disk_content.insert(disk_num, sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
             elif section.startswith(vmsection + ':network:'):
-                network_content.append(sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
+                index = section.rfind(':')
+                net_num = int(section[index + 1:])
+                network_content.insert(net_num, sjconf.PluginWithTemplate.file_content(self, '%s::%s' % (file_path, section)))
 
         self.conf[vmsection]['name'] = vmsection[len(prefix):]
         self.conf[vmsection]['vm_disks'] = '\n'.join(disk_content)
