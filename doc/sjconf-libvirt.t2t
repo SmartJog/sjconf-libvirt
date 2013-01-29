@@ -21,9 +21,9 @@ The plugin allows one **[libvirt]** section and multiple sections of the form
 **[libvirt:vmname]**, **[libvirt:vmname:disk:slot]** and
 **[libvirt:vmname:network:slot]**.
 
-A virtual machine definition is composed of a least one **libvirt:vmname**.
+A virtual machine definition is composed of at least one **libvirt:vmname**.
 **libvirt:vmname:disk:slot** and **libvirt:vmname:network:slot**, where
-//slot// is an usually an integer, are used to add virtual disks or virtual
+//slot// is usually an integer, are used to add virtual disks or virtual
 network interfaces to the //vmname// virtual machine definition.
 
 Section **libvirt** must have the following options:
@@ -40,7 +40,7 @@ Path to the network fragment of a virtual machine definition.
 
 = OPTIONS =
 
-Section **libvirt:vmname** need the following options:
+Section **libvirt:vmname** needs the following options:
 
 :    **uuid** = //string//
 A unique identifier for the virtual machine.
@@ -59,7 +59,7 @@ Section **libvirt:vmname** may contain the following options:
 
 :    **vnc_port** = //integer//
 Port on which the VNC server will listen for incoming connections.
-Setting to -1 leave libvirt to determine which port to use automatically.
+Setting to -1 means libvirt will choose the port to use automatically.
 
 :    **vnc_listen** = //IP//
 IP address on which the VNC server will listen for incoming connections.
@@ -85,6 +85,9 @@ Path to the file that will be used as a virtual disk drive.
 
 :    **size** = //size//
 Size of the disk drive. Unused for now.
+
+
+**Please note that libvirt will try to boot the first disk.**
 
 
 **libvirt:vmname:network:slot** sections need the following options:
@@ -125,12 +128,19 @@ value is written as hexadecimal and starts at 0x04 with the default template.
   filename = /mnt/space/vms/test/hdd0.img
   size = 20G
 
+  [libvirt:vm1:disk:1]
+  device = vdb
+  driver = virtio
+  slot = 0x06
+  filename = /mnt/space/vms/test/hdd1.img
+  size = 20G
+
   [libvirt:vm1:network:0]
   net_type = bridge
   device = virbr0
   driver = virtio
   mac = 52:54:00:00:9c:76
-  slot = 0x06
+  slot = 0x07
 
 
 = AUTHOR =
