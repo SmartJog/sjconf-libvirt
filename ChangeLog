@@ -2,6 +2,7 @@ Version 0.1.1~dev
 
 	* Fix interface ordering in some random cases, closes: #6577
 	* Improve the man page
+	* Update the README
 
 Version 0.1.0 Released on 2011/08/29
 

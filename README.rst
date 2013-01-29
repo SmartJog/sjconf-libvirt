@@ -47,7 +47,8 @@ version 1.10.0 is more up to date than 1.10.0~dev).
 Authors
 =======
 
-sjconf-libvirt was created at SmartJog by :
+sjconf-libvirt was started at SmartJog by Gilles Dartiguelongue.
 
 * Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>
+* Nicolas Delvaux <nicolas.delvaux@smartjog.com>
 
