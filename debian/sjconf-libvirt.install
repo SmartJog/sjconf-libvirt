@@ -1,3 +1,4 @@
 plugins/*.py            usr/share/sjconf-libvirt/plugins
 confs/libvirt.conf      usr/share/sjconf-libvirt/confs
 templates/libvirt/*.xml usr/share/sjconf-libvirt/templates/libvirt
+templates/libvirt/libvirt-bin.default usr/share/sjconf-libvirt/templates/libvirt

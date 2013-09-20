@@ -40,6 +40,12 @@ Path to the network fragment of a virtual machine definition.
 
 = OPTIONS =
 
+Section **libvirt** may have the following option:
+
+:    **enable_daemon** = //false//
+Enable or disable the libvirt-bin init script.
+
+
 Section **libvirt:vmname** needs the following options:
 
 :    **uuid** = //string//
@@ -110,6 +116,9 @@ value is written as hexadecimal and starts at 0x04 with the default template.
 
 
 = EXAMPLE =
+
+  [libvirt]
+  enable_daemon = true
 
   [libvirt:vm1]
   name = vmtest

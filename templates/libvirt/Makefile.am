@@ -1,2 +1,3 @@
 libvirt_templatedir = $(pkgdatadir)/templates/libvirt
-dist_libvirt_template_DATA = $(wildcard *.xml)
+dist_libvirt_template_DATA = $(wildcard *.xml) \
+                             libvirt-bin.default

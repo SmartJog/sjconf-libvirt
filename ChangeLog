@@ -1,6 +1,7 @@
 Version 0.1.2~dev
 
-	* TODO
+	* Add an option to enable/disable libvirt init script
+	* Disable libvirtd by default, closes: RXTX-244
 
 Version 0.1.1 Released on 2013/01/29
 

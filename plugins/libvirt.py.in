@@ -29,7 +29,8 @@ class Plugin(sjconf.PluginWithTemplate):
                     value = 'passwd="%s"' % value
                 else:
                     value = ""
-
+            elif key == 'enable_daemon_bool':
+                value = value and 'yes' or 'no'
             return value
 
     def services_to_restart(self):
@@ -42,16 +43,21 @@ class Plugin(sjconf.PluginWithTemplate):
         """ List of special option types. """
         return (
             (re.compile('^%s(:|$)' % self.name()), 'memory', 'size'),
+            (self.name(), 'enable_daemon', 'bool')
         )
 
     def conf_files_path(self):
         """ List of configuration files to handle. """
         prefix = self.name() + ':'
-        return [self.sjconf.etc_dir + '/libvirt/qemu/%s.xml' % vmconf[len(prefix):]
-            for vmconf in self.conf if vmconf.startswith(prefix) and not ':' in vmconf[len(prefix):]]
+        files = [self.sjconf.etc_dir + '/libvirt/qemu/%s.xml' % vmconf[len(prefix):]
+                 for vmconf in self.conf if vmconf.startswith(prefix) and not ':' in vmconf[len(prefix):]]
+        files.append(self.sjconf.etc_dir + '/default/libvirt-bin')
+        return files
 
     def template_conf(self, file_path):
         """ Select appropriate configuration for @file_path. """
+        if file_path == '/etc/default/libvirt-bin':
+            return self.conf['libvirt']
         section_name = file_path.split('::')[-1]
         conf = self.conf[self.name()]
         conf.update(self.conf[section_name])
@@ -62,11 +68,14 @@ class Plugin(sjconf.PluginWithTemplate):
 
         @file_path must be of the form path::section
         """
+
         section_name = file_path.split('::')[-1]
         if ':disk:' in section_name:
             template_key = 'disk'
         elif ':network:' in section_name:
             template_key = 'network'
+        elif section_name == file_path:
+            template_key = 'default'
         else:
             template_key = 'vm'
 
@@ -74,6 +83,10 @@ class Plugin(sjconf.PluginWithTemplate):
 
     def file_content(self, file_path):
         """ Generate @file_path configuration file. """
+
+        if file_path == '/etc/default/libvirt-bin':
+            print self.conf['libvirt']
+            return sjconf.PluginWithTemplate.file_content(self, file_path)
         prefix = self.name() + ':'
 
         # Identify VM
