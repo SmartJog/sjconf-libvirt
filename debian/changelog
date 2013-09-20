@@ -1,3 +1,9 @@
+sjconf-libvirt (0.1.2~dev-1) UNRELEASED; urgency=low
+
+  * New upstream release
+
+ -- Nicolas Delvaux <nicolas.delvaux@smartjog.com>  Fri, 20 Sep 2013 10:54:37 +0200
+
 sjconf-libvirt (0.1.1-1) unstable; urgency=low
 
   * New upstream release
