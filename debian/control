@@ -1,8 +1,7 @@
 Source: sjconf-libvirt
 Priority: optional
 Section: admin
-Maintainer: Philippe Bridant <philippe.bridant@smartjog.com>
-Uploaders: Nicolas Delvaux <nicolas.delvaux@smartjog.com>
+Maintainer: Nicolas Delvaux <nicolas.delvaux@smartjog.com>
 Build-Depends: cdbs (>= 0.4.43),
 	       debhelper (>= 7),
 	       txt2tags,
