@@ -7,14 +7,14 @@ PLUGINS="libvirt"
 
 for plugin in $PLUGINS
 do
-	if ! sjconf --list-plugins | grep "^Plugin $plugin$" > /dev/null
+	if ! sjconf --list-plugins | grep "^Plugin $plugin:$" > /dev/null
 	then
-		sjconf --install-conf --link /usr/share/sjconf-libvirt/confs/$plugin.conf
+		sjconf --install-conf-with-symlink /usr/share/sjconf-libvirt/confs/$plugin.conf
         if [ -e /usr/share/sjconf-libvirt/templates/$plugin ]
         then
-            sjconf --install-template --link /usr/share/sjconf-libvirt/templates/$plugin
+            sjconf --install-template-with-symlink /usr/share/sjconf-libvirt/templates/$plugin
         fi
-		sjconf --install-plugin --link /usr/share/sjconf-libvirt/plugins/$plugin.py
+		sjconf --install-plugin-with-symlink /usr/share/sjconf-libvirt/plugins/$plugin.py
 		sjconf --enable-plugin $plugin
 	fi
 done

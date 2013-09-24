@@ -1,6 +1,7 @@
 sjconf-libvirt (0.1.2~dev-1) UNRELEASED; urgency=low
 
   * New upstream release, closes: RXTX-244
+  * Adapt the packaging to the new upstream API
 
  -- Nicolas Delvaux <nicolas.delvaux@smartjog.com>  Fri, 20 Sep 2013 10:54:37 +0200
 
