@@ -5,7 +5,7 @@ Maintainer: Nicolas Delvaux <nicolas.delvaux@smartjog.com>
 Build-Depends: debhelper (>= 8),
                python-all (>= 2.6.6-3~),
                txt2tags
-Standards-Version: 3.9.1
+Standards-Version: 3.9.4
 
 Package: sjconf-libvirt
 Architecture: all
