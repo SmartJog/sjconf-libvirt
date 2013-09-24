@@ -5,6 +5,7 @@ sjconf-libvirt (0.1.2~dev-1) UNRELEASED; urgency=low
   * Make myself the package maintainer
   * Switch to source format 3.0 (quilt)
   * Add a debian/watch file
+  * Transition from python-central to dh_python2
 
  -- Nicolas Delvaux <nicolas.delvaux@smartjog.com>  Fri, 20 Sep 2013 10:54:37 +0200
 
