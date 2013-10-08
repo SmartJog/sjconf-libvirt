@@ -85,7 +85,6 @@ class Plugin(sjconf.PluginWithTemplate):
         """ Generate @file_path configuration file. """
 
         if file_path == '/etc/default/libvirt-bin':
-            print self.conf['libvirt']
             return sjconf.PluginWithTemplate.file_content(self, file_path)
         prefix = self.name() + ':'
 
