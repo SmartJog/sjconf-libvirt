@@ -2,18 +2,16 @@ Source: sjconf-libvirt
 Priority: optional
 Section: admin
 Maintainer: Nicolas Delvaux <nicolas.delvaux@smartjog.com>
+Uploaders: Julien Mori <julien.mori@arkena.com>
 Build-Depends: debhelper (>= 8),
                python-all (>= 2.6.6-3~),
                txt2tags
-Standards-Version: 3.9.4
+Standards-Version: 3.9.6
 
 Package: sjconf-libvirt
 Architecture: all
 Pre-Depends: sjconf1 (>= 1.13.0)
-Depends: python (>= 2.6.6-3+squeeze3~),
-# Explicitely set the python dependency because of an internal python backport
-# TODO drop when switching to Wheezy!
-#        ${python:Depends},
+Depends: ${python:Depends},
          ${misc:Depends},
 	 libvirt-bin (>= 0.8)
 Description: sjconf plugin for libvirt
