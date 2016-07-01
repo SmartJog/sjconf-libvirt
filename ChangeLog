@@ -1,3 +1,7 @@
+Version 0.1.4 Released on 2016/07/01
+
+	* Change libvirt conf file to /etc/defaults/libvirtd
+
 Version 0.1.3 Released on 2013/10/08
 
 	* Remove a forgotten debugging print
