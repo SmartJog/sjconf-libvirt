@@ -43,7 +43,7 @@ Path to the network fragment of a virtual machine definition.
 Section **libvirt** may have the following option:
 
 :    **enable_daemon** = //false//
-Enable or disable the libvirt-bin init script.
+Enable or disable the libvirtd init script.
 
 
 Section **libvirt:vmname** needs the following options:

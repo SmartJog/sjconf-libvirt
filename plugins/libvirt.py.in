@@ -34,10 +34,10 @@ class Plugin(sjconf.PluginWithTemplate):
             return value
 
     def services_to_restart(self):
-        return ('libvirt-bin',)
+        return ('libvirtd',)
 
     def services_to_reload(self):
-        return ('libvirt-bin',)
+        return ('libvirtd',)
 
     def conf_types(self):
         """ List of special option types. """
@@ -51,12 +51,12 @@ class Plugin(sjconf.PluginWithTemplate):
         prefix = self.name() + ':'
         files = [self.sjconf.etc_dir + '/libvirt/qemu/%s.xml' % vmconf[len(prefix):]
                  for vmconf in self.conf if vmconf.startswith(prefix) and not ':' in vmconf[len(prefix):]]
-        files.append(self.sjconf.etc_dir + '/default/libvirt-bin')
+        files.append(self.sjconf.etc_dir + '/default/libvirtd')
         return files
 
     def template_conf(self, file_path):
         """ Select appropriate configuration for @file_path. """
-        if file_path == '/etc/default/libvirt-bin':
+        if file_path == '/etc/default/libvirtd':
             return self.conf['libvirt']
         section_name = file_path.split('::')[-1]
         conf = self.conf[self.name()]
@@ -84,7 +84,7 @@ class Plugin(sjconf.PluginWithTemplate):
     def file_content(self, file_path):
         """ Generate @file_path configuration file. """
 
-        if file_path == '/etc/default/libvirt-bin':
+        if file_path == '/etc/default/libvirtd':
             return sjconf.PluginWithTemplate.file_content(self, file_path)
         prefix = self.name() + ':'
 
